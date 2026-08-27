@@ -41,6 +41,7 @@ CREATE TABLE bronze.product_master (
   Launch_Date DATE,
   Discontinuation_Date DATE
 );
+GO
 
 IF OBJECT_ID ('bronze.supplier_master' , 'U') IS NOT NULL
   DROP TABLE bronze.supplier_master;
@@ -55,9 +56,10 @@ CREATE TABLE bronze.supplier_master (
   Certification_Level NVARCHAR(100),
   Preferred_Supplier_Flag INT
 );
-
-IF OBJECT_ID ('bronze.sales_master' , 'U') IS NOT NULL
-  DROP TABLE bronze.sales_master;
+GO
+  
+IF OBJECT_ID ('bronze.sales_orders' , 'U') IS NOT NULL
+  DROP TABLE bronze.sales_orders;
 GO
 -- Creates Bronze Sales Table 
 CREATE TABLE bronze.sales_orders (
@@ -82,9 +84,10 @@ Order_Total FLOAT,
 VAT_Amount FLOAT,
 Profit_Per_Order FLOAT
 );
-
-IF OBJECT_ID ('bronze.procurement_master' , 'U') IS NOT NULL
-  DROP TABLE bronze.procurement_master;
+GO
+  
+IF OBJECT_ID ('bronze.procurement_orders' , 'U') IS NOT NULL
+  DROP TABLE bronze.procurement_orders;
 GO
 -- Creates Bronze Procurement Table
 CREATE TABLE bronze.procurement_orders (
@@ -98,3 +101,4 @@ Delivery_Date_Planned DATE,
 Delivery_Date_Actual DATE,
 Total_Cost FLOAT
 );
+GO
