@@ -1,4 +1,17 @@
+/*
+-------------------------------------------------------------------
+This DDL Script creates Bronze tables in the Medallion Architecture
+-------------------------------------------------------------------
+Script Purpose:
+This script creates tables in the 'bronze' schema, and will get rid of
+existing tables.
+-------------------------------------------------------------------
+*/
 
+-- If the table already exists it'll delete it and make a new one.
+IF OBJECT_ID ('bronze.customer_master' , 'U') IS NOT NULL
+  DROP TABLE bronze.customer_master;
+GO
 -- Creates Bronze Customer Table (sell-side)
 CREATE TABLE bronze.customer_master (
   Customer_ID NVARCHAR (100),
@@ -9,8 +22,12 @@ CREATE TABLE bronze.customer_master (
   City NVARCHAR(100),
   Latitude FLOAT,
   Longitude FLOAT
-)
+);
+GO
 
+IF OBJECT_ID ('bronze.product_master' , 'U') IS NOT NULL
+  DROP TABLE bronze.product_master;
+GO
 -- Creates Bronze Product Table 
 CREATE TABLE bronze.product_master (
   Product_ID NVARCHAR(100),
@@ -23,8 +40,11 @@ CREATE TABLE bronze.product_master (
   Standard_Price FLOAT,
   Launch_Date DATE,
   Discontinuation_Date DATE
-)
+);
 
+IF OBJECT_ID ('bronze.supplier_master' , 'U') IS NOT NULL
+  DROP TABLE bronze.supplier_master;
+GO
 -- Creates Bronze Supplier Table
 CREATE TABLE bronze.supplier_master (
   Supplier_ID NVARCHAR(100),
@@ -34,8 +54,11 @@ CREATE TABLE bronze.supplier_master (
   On_Time_Delivery_Rate FLOAT,
   Certification_Level NVARCHAR(100),
   Preferred_Supplier_Flag INT
-)
+);
 
+IF OBJECT_ID ('bronze.sales_master' , 'U') IS NOT NULL
+  DROP TABLE bronze.sales_master;
+GO
 -- Creates Bronze Sales Table 
 CREATE TABLE bronze.sales_orders (
 Order_ID NVARCHAR(100),
@@ -57,9 +80,12 @@ COGS INT,
 Unit_Price_Effective FLOAT,
 Order_Total FLOAT,
 VAT_Amount FLOAT,
-Profit_Per_Order FLOAT,
-)
+Profit_Per_Order FLOAT
+);
 
+IF OBJECT_ID ('bronze.procurement_master' , 'U') IS NOT NULL
+  DROP TABLE bronze.procurement_master;
+GO
 -- Creates Bronze Procurement Table
 CREATE TABLE bronze.procurement_orders (
 PO_ID NVARCHAR(100),
@@ -71,4 +97,4 @@ Unit_Cost FLOAT,
 Delivery_Date_Planned DATE,
 Delivery_Date_Actual DATE,
 Total_Cost FLOAT
-)
+);
