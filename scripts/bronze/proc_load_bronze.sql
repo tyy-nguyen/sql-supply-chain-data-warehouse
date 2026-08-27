@@ -1,3 +1,19 @@
+/*
+----------------------------------------------------
+Stored Procedure: Load Bronze Layer
+----------------------------------------------------
+Script Purpose:
+This script loads data into 'bronze' tables from external CSV files.
+"Source: 'Supply Chain Datasets' by Ayodeji Ibrahim Lateef, Kaggle, CC BY 4.0"
+----------------------------------------------------
+This script performs the following actions:
+- Truncates the bronze tables before loading them
+- Uses 'BULK INSERT' command to load data from CSV files to bronze tables
+
+USAGE EXAMPLE:
+EXEC bronze.load_bronze;
+*/
+
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
     DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;
@@ -14,7 +30,7 @@ BEGIN
 
         PRINT '>> Inserting Data Into: bronze.customer_master';
         BULK INSERT bronze.customer_master
-        FROM 'C:\Users\tyler\OneDrive\Documents\projects\supply-chain-warehouse-project\raw_data\customer_master.csv'
+        FROM '<your_path>\raw_data\customer_master.csv'
         WITH (
             FIRSTROW = 2,
             FIELDTERMINATOR = ',',
@@ -31,7 +47,7 @@ BEGIN
 
         PRINT '>> Inserting Data Into: bronze.product_master';
         BULK INSERT bronze.product_master
-        FROM 'C:\Users\tyler\OneDrive\Documents\projects\supply-chain-warehouse-project\raw_data\product_master.csv'
+        FROM '<your_path>\raw_data\product_master.csv'
         WITH (
             FIRSTROW = 2,
             FIELDTERMINATOR = ',',
@@ -48,7 +64,7 @@ BEGIN
 
         PRINT '>> Inserting Data Into: bronze.supplier_master';
         BULK INSERT bronze.supplier_master
-        FROM 'C:\Users\tyler\OneDrive\Documents\projects\supply-chain-warehouse-project\raw_data\supplier_master.csv'
+        FROM '<your_path>\raw_data\supplier_master.csv'
         WITH (
             FIRSTROW = 2,
             FIELDTERMINATOR = ',',
@@ -65,7 +81,7 @@ BEGIN
 
         PRINT '>> Inserting Data Into: bronze.sales_orders';
         BULK INSERT bronze.sales_orders
-        FROM 'C:\Users\tyler\OneDrive\Documents\projects\supply-chain-warehouse-project\raw_data\sales_orders.csv'
+        FROM '<your_path>\raw_data\sales_orders.csv'
         WITH (
             FIRSTROW = 2,
             FIELDTERMINATOR = ',',
@@ -82,7 +98,7 @@ BEGIN
 
         PRINT '>> Inserting Data Into: bronze.procurement_orders';
         BULK INSERT bronze.procurement_orders
-        FROM 'C:\Users\tyler\OneDrive\Documents\projects\supply-chain-warehouse-project\raw_data\procurement_orders.csv'
+        FROM '<your_path>\raw_data\procurement_orders.csv'
         WITH (
             FIRSTROW = 2,
             FIELDTERMINATOR = ',',
